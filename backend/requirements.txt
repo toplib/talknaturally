@@ -1,0 +1,5 @@
+sounddevice>=0.5.3
+vosk>=0.3.45
+faster-whisper>=1.2.1
+numpy>=1.25.0
+tqdm>=4.66.0
