@@ -1,5 +1,5 @@
 from llm import LLMClient
-from vosk_stt import (
+from stt import (
     SpeechRecognizer,
     MicrophoneStream,
     MODEL_PATH,
@@ -8,12 +8,12 @@ from vosk_stt import (
     CHANNELS,
 )
 
+# Initialize modules
 llm = LLMClient()
 recognizer = SpeechRecognizer(MODEL_PATH)
 
 print("🎤 Speak (Ctrl+C to stop)")
 
-# Initialize chat history with system prompt
 chat_history = [
     {
         "role": "system",
@@ -39,7 +39,7 @@ with MicrophoneStream(SAMPLE_RATE, BLOCK_SIZE, CHANNELS) as mic:
                 # Append user input to chat history
                 chat_history.append({"role": "user", "content": user_text})
 
-                # Stream assistant response
+                # Stream LLM response
                 assistant_response = ""
                 for token in llm.chat_stream(chat_history):
                     print(token, end="", flush=True)
